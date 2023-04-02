@@ -1,3 +1,27 @@
-h1, h2 {
-  font-family: Lato;
+.tittle{
+  animation: rainbow 10s infinite;
+  text-align: center;
+  text-decoration: underline;
+}
+@keyframes rainbow {
+  0% { color: red; }
+  14% { color: orange; }
+  42% { color: green; }
+  56% { color: blue; }
+  70% { color: indigo; }
+  84% { color: violet; }
+  100% { color: red; }
+}
+.wordle-layout-grid-container{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  row-gap: 2px;
+  column-gap: -200px;
+}
+
+.box {
+  background-color: #ccc;
+  height: 25px;
+  width: 50%;
 }
