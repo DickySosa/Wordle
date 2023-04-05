@@ -1,6 +1,7 @@
 // Import stylesheets
 import './style.css';
 
+const letter = document.querySelectorAll('.scoreboard-letter');
 
 /*
 let boxes = document.querySelector('.wordle-layout-grid-container');
