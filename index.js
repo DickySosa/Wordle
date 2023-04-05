@@ -1,6 +1,8 @@
 // Import stylesheets
 import './style.css';
 
+
+/*
 let boxes = document.querySelector('.wordle-layout-grid-container');
 
 function doMoreBoxes() {
@@ -12,3 +14,4 @@ function doMoreBoxes() {
   }
 }
 doMoreBoxes();
+*/
