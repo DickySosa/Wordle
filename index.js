@@ -47,6 +47,18 @@ async function init() {
       }
     }
 
+    for (let i = 0; i < ANSWER_LENGTH; i++) {
+      if (guesParts[i] === wordParts[i]) {
+        //do nothing, its already done
+        /*wordParts is an array, function .includes helps  us to verify if wordParts
+        have anywhere guesParts inside of it*/
+      } else if (wordParts.includes(guesParts[i])) {
+        letters[currentRow * ANSWER_LENGTH + i].classList.add('close');
+      } else {
+        letters[currentRow * ANSWER_LENGTH + i].classList.add('wrong');
+      }
+    }
+
     //win or lose
     currentRow++;
     currentGuess = '';
