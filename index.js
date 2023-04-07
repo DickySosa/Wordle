@@ -28,6 +28,7 @@ async function init() {
       letter;
   }
 
+  //navegate through the lines of the boxes
   async function commit() {
     if (currentGuess.length != ANSWER_LENGTH) {
       //do nothing
@@ -38,11 +39,13 @@ async function init() {
     currentGuess = '';
   }
 
+  //fuction that helps to go back in the boxes
   function backspace() {
     currentGuess = currentGuess.substring(0, currentGuess.length - 1);
     letters[ANSWER_LENGTH * currentRow + currentGuess.length].innerText = '';
   }
 
+  //validate the keys and comands
   document.addEventListener('keydown', function handlekeyPress(event) {
     const action = event.key;
 
@@ -57,9 +60,12 @@ async function init() {
     }
   });
 }
+
+//Use this function to test is a string is a single alphabetical string is a letter
 function isLetter(letter) {
   return /^[a-zA-Z]$/.test(letter);
 }
+//loading div
 function setLoading(isLoading) {
   loadingDiv.classList.toggle('show', isLoading);
 }
