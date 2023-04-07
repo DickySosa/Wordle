@@ -12,6 +12,7 @@ async function init() {
   const res = await fetch('https://words.dev-apis.com/word-of-the-day');
   const resObj = await res.json();
   const word = resObj.word.toUpperCase();
+  const wordParts = word.split('');
   setLoading(false);
   console.log(word);
 
@@ -35,6 +36,18 @@ async function init() {
       return;
     }
 
+    //Correct, close, wrong
+    //split what it does is that return a string coverten into an array. try  "POOLS".split
+
+    const guesParts = currentGuess.split('');
+
+    for (let i = 0; i < ANSWER_LENGTH; i++) {
+      if (guesParts[i] === wordParts[i]) {
+        letters[currentRow * ANSWER_LENGTH + i].classList.add('correct');
+      }
+    }
+
+    //win or lose
     currentRow++;
     currentGuess = '';
   }
