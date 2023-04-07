@@ -86,6 +86,7 @@ async function init() {
 
     if (currentGuess === word) {
       alert('You Win!');
+      document.querySelector('.brand').classList.add('winner');
       done = true;
       return;
     }
@@ -109,7 +110,11 @@ async function init() {
     //alert('Not a valid word')
 
     for (let i = 0; i < ANSWER_LENGTH; i++) {
-      letters[currentRow * ANSWER_LENGTH + i].classList.add('invalid');
+      letters[currentRow * ANSWER_LENGTH + i].classList.remove('invalid');
+
+      setTimeout(function () {
+        letters[currentRow * ANSWER_LENGTH + i].classList.add('invalid');
+      }, 10);
     }
   }
 
