@@ -9,9 +9,10 @@ async function init() {
   let currentGuess = '';
   let currentRow = 0;
 
-  const res = await fetch('http://words.dev-apis.com/word-of-the-day');
+  const res = await fetch('https://words.dev-apis.com/word-of-the-day');
   const resObj = await res.json();
-  const word = resObj.word.toUpperCase;
+  const word = resObj.word.toUpperCase();
+
   console.log(word);
 
   function addLetter(letter) {
