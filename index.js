@@ -8,11 +8,13 @@ const ANSWER_LENGTH = 5;
 async function init() {
   let currentGuess = '';
   let currentRow = 0;
+  const ROUNDS = 6;
 
   const res = await fetch('https://words.dev-apis.com/word-of-the-day');
   const resObj = await res.json();
   const word = resObj.word.toUpperCase();
   const wordParts = word.split('');
+  let done = false;
   setLoading(false);
   console.log(word);
 
@@ -40,10 +42,12 @@ async function init() {
     //split what it does is that return a string coverten into an array. try  "POOLS".split
 
     const guesParts = currentGuess.split('');
+    const map = makeMap(wordParts);
 
     for (let i = 0; i < ANSWER_LENGTH; i++) {
       if (guesParts[i] === wordParts[i]) {
         letters[currentRow * ANSWER_LENGTH + i].classList.add('correct');
+        map[guesParts[i]]--;
       }
     }
 
@@ -52,16 +56,29 @@ async function init() {
         //do nothing, its already done
         /*wordParts is an array, function .includes helps  us to verify if wordParts
         have anywhere guesParts inside of it*/
-      } else if (wordParts.includes(guesParts[i])) {
+      } else if (wordParts.includes(guesParts[i]) && map[guesParts[i]] > 0) {
         letters[currentRow * ANSWER_LENGTH + i].classList.add('close');
+        map[guesParts[i]]--;
       } else {
         letters[currentRow * ANSWER_LENGTH + i].classList.add('wrong');
       }
     }
 
     //win or lose
+
+    if (currentGuess === word) {
+      alert('You Win!');
+      done = true;
+      return;
+    }
+
     currentRow++;
     currentGuess = '';
+
+    if (currentRow === ROUNDS) {
+      alert(`you lose, the words was ${word}`);
+      done = true;
+    }
   }
 
   //fuction that helps to go back in the boxes
@@ -93,6 +110,19 @@ function isLetter(letter) {
 //loading div
 function setLoading(isLoading) {
   loadingDiv.classList.toggle('show', isLoading);
+}
+
+function makeMap(array) {
+  const obj = {};
+  for (let i = 0; i < array.length; i++) {
+    const letter = array[i];
+    if (obj[letter]) {
+      obj[letter]++;
+    } else {
+      obj[letter] = 1;
+    }
+  }
+  return obj;
 }
 
 init();
