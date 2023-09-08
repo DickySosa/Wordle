@@ -35,7 +35,6 @@ async function init() {
   //navegate through the lines of the boxes
   async function commit() {
     if (currentGuess.length != ANSWER_LENGTH) {
-      //do nothing
       return;
     }
 
@@ -57,7 +56,6 @@ async function init() {
       return;
     }
 
-    //Correct, close, wrong
     //split what it does is that return a string coverten into an array. try  "POOLS".split
     const guesParts = currentGuess.split('');
     const map = makeMap(wordParts);
@@ -71,9 +69,6 @@ async function init() {
 
     for (let i = 0; i < ANSWER_LENGTH; i++) {
       if (guesParts[i] === wordParts[i]) {
-        //do nothing, its already done
-        /*wordParts is an array, function .includes helps  us to verify if wordParts
-        have anywhere guesParts inside of it*/
       } else if (wordParts.includes(guesParts[i]) && map[guesParts[i]] > 0) {
         letters[currentRow * ANSWER_LENGTH + i].classList.add('close');
         map[guesParts[i]]--;
@@ -105,9 +100,8 @@ async function init() {
     currentGuess = currentGuess.substring(0, currentGuess.length - 1);
     letters[ANSWER_LENGTH * currentRow + currentGuess.length].innerText = '';
   }
-  //////////////////////////////////////////////////////////////////////////////////////////
   function markInvalidWord() {
-    //alert('Not a valid word')
+    alert('Not a valid word');
 
     for (let i = 0; i < ANSWER_LENGTH; i++) {
       letters[currentRow * ANSWER_LENGTH + i].classList.remove('invalid');
@@ -121,7 +115,6 @@ async function init() {
   //validate the keys and comands
   document.addEventListener('keydown', function handlekeyPress(event) {
     if (done || isLoading) {
-      //do nothing
       return;
     }
     const action = event.key;
@@ -133,7 +126,6 @@ async function init() {
     } else if (isLetter(action)) {
       addLetter(action.toUpperCase());
     } else {
-      // do nothing
     }
   });
 }
@@ -161,17 +153,3 @@ function makeMap(array) {
 }
 
 init();
-
-/*
-let boxes = document.querySelector('.wordle-layout-grid-container');
-
-function doMoreBoxes() {
-  console.log('si');
-  for (let i = 1; i <= 29; i++) {
-    const moreBoxes = document.createElement('input');
-    moreBoxes.setAttribute('class', 'box');
-    boxes.appendChild(moreBoxes);
-  }
-}
-doMoreBoxes();
-*/
